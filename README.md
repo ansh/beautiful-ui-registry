@@ -39,12 +39,25 @@ It defines the vocabulary the class names use, which is what makes the component
 - **Surfaces**, back to front — `page`, `canvas`, `surface`, `inset`, `hover`, `hover-2`, `field`
 - **Ink ramp** — `ink`, `ink-2`, `ink-3`
 - **Hairlines** — `line`, `line-strong`, `line-soft`
-- **Semantic** — `accent`, `green`, `orange`, `red`, each with a `-tint`
+- **Semantic** — `bui-accent`, `green`, `orange`, `red`, each with a `-tint`
 - **Radii** — `chip` 6px, `control` 8px, `card` 10px, `window` 14px
 - **Elevation** — `shadow-hairline`, `shadow-btn`, `shadow-card`, `shadow-raised`, `shadow-overlay`, each a 1px ring plus a layered drop shadow rather than a border
 - **Easing** — `--ease-out-strong` `cubic-bezier(0.23, 1, 0.32, 1)` on nearly every transition
 
 Light and dark are both defined; dark activates under `.dark`.
+
+### Coexisting with a shadcn theme
+
+`accent` is the one token name that collides with a stock shadcn theme, where it
+means a muted hover surface rather than the primary action colour. Ours is
+namespaced `bui-accent` / `bui-accent-ink` / `bui-accent-tint` so both can live in
+the same app — otherwise whichever stylesheet loaded second wins and the other
+system's accent utilities resolve to an invalid colour, silently. Every other
+Beautiful UI token name is already unique.
+
+For the same reason the theme does not claim `--font-sans` or `--font-mono`;
+components inherit the host app's typography. The `prefers-reduced-motion` rule is
+scoped to this library's own keyframes rather than matching `*`.
 
 ## Requirements
 

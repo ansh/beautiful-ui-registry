@@ -114,7 +114,7 @@ function StatusDot({ status }: { status: ToolCallStatus }) {
     return (
       <span
         aria-label="running"
-        className="size-1.5 shrink-0 rounded-full bg-accent"
+        className="size-1.5 shrink-0 rounded-full bg-bui-accent"
         style={{ animation: "bui-pixel-on 900ms ease-in-out infinite" }}
       />
     );

@@ -32,7 +32,7 @@ const STATUS_LABEL: Record<TaskStatus, string> = {
 
 const STATUS_PILL: Record<TaskStatus, string> = {
   queued: "bg-inset text-ink-3 shadow-hairline",
-  running: "bg-accent-tint text-accent-ink",
+  running: "bg-bui-accent-tint text-bui-accent-ink",
   completed: "bg-green-tint text-green",
   failed: "bg-red-tint text-red",
 };
@@ -157,9 +157,9 @@ function StatusGlyph({ status }: { status: TaskStatus }) {
 
   if (status === "running") {
     return (
-      <span className="flex size-5.5 shrink-0 items-center justify-center rounded-full bg-accent-tint">
+      <span className="flex size-5.5 shrink-0 items-center justify-center rounded-full bg-bui-accent-tint">
         <span
-          className="size-2 rounded-full bg-accent"
+          className="size-2 rounded-full bg-bui-accent"
           style={{ animation: "bui-pixel-on 900ms ease-in-out infinite" }}
         />
       </span>

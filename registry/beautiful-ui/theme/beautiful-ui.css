@@ -28,9 +28,9 @@
   --color-grid-line: var(--grid-line);
 
   /* semantic */
-  --color-accent: var(--accent);
-  --color-accent-ink: var(--accent-ink);
-  --color-accent-tint: var(--accent-tint);
+  --color-bui-accent: var(--bui-accent);
+  --color-bui-accent-ink: var(--bui-accent-ink);
+  --color-bui-accent-tint: var(--bui-accent-tint);
   --color-green: var(--green);
   --color-green-tint: var(--green-tint);
   --color-orange: var(--orange);
@@ -57,8 +57,6 @@
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-link: cubic-bezier(0.16, 1, 0.3, 1);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono-face), ui-monospace, "SF Mono", monospace;
 }
 
 /*
@@ -76,8 +74,6 @@
 }
 
 :root {
-  --font-inter: "Inter", "Inter Fallback";
-  --font-mono-face: "JetBrains Mono", "JetBrains Mono Fallback";
 
   --page: oklch(98.5% 0.001 286.376);
   --canvas: oklch(96.1% 0.002 247.84);
@@ -96,9 +92,9 @@
   --line-soft: oklch(96.6% 0.002 264.542);
   --grid-line: var(--line);
 
-  --accent: oklch(62.6% 0.205 254.947);
-  --accent-ink: oklch(55.6% 0.187 255.617);
-  --accent-tint: oklch(96% 0.019 252.878);
+  --bui-accent: oklch(62.6% 0.205 254.947);
+  --bui-accent-ink: oklch(55.6% 0.187 255.617);
+  --bui-accent-tint: oklch(96% 0.019 252.878);
   --green: oklch(60.3% 0.155 150.883);
   --green-tint: oklch(95.8% 0.017 159.118);
   --orange: oklch(68.9% 0.179 49.902);
@@ -153,9 +149,9 @@
   --line-soft: oklch(27.8% 0.006 258.354);
   --grid-line: color-mix(in srgb, var(--line) 78%, transparent);
 
-  --accent: oklch(68% 0.173 253.301);
-  --accent-ink: oklch(78.8% 0.113 248.33);
-  --accent-tint: oklch(68% 0.173 253.301 / 0.16);
+  --bui-accent: oklch(68% 0.173 253.301);
+  --bui-accent-ink: oklch(78.8% 0.113 248.33);
+  --bui-accent-tint: oklch(68% 0.173 253.301 / 0.16);
   --green: oklch(70.5% 0.154 153.814);
   --green-tint: oklch(70.5% 0.154 153.814 / 0.14);
   --orange: oklch(74.6% 0.156 55.642);
@@ -237,13 +233,15 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* the shimmer and pixel loops are decorative; the state they signal is
-     always carried by text or an aria-live region as well */
-  *,
-  *::before,
-  *::after {
+  /* Scoped to this library's own keyframes — a component set shouldn't decide
+     the host app's motion policy. The shimmer and pixel loops are decorative;
+     the state they signal is always carried by text or an aria-live region too. */
+  [style*="bui-shimmer-text"],
+  [style*="bui-fade-up"],
+  [style*="bui-pixel-on"],
+  [style*="bui-pop-in"],
+  [style*="bui-caret"] {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 }

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "loading-state",
+  "type": "registry:ui",
+  "title": "Loading State",
+  "description": "Pixel-grid loader with shimmer and elapsed time.",
+  "author": "Shane Levine <https://www.beautifului.dev>",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://beautiful-ui.chorus.host/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "registry/beautiful-ui/ui/loading-state.tsx",
+      "type": "registry:ui",
+      "target": "components/beautiful-ui/loading-state.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\n// The nine cells fire on a 90ms stagger, but not in reading order — the\n// out-of-sequence delays are what make it read as computation rather than\n// a progress bar.\nconst PIXEL_DELAYS = [90, 180, 270, 0, 90, 180, 90, 180, 270];\n\nexport interface LoadingStateProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Shimmering label. Swap it per phase — \"Churning\", \"Indexing\", \"Compiling\". */\n  label?: string;\n  /** Show elapsed seconds beside the label. */\n  elapsed?: boolean;\n  /** Freeze the animation and the timer. */\n  paused?: boolean;\n}\n\nexport function LoadingState({\n  label = \"Churning\",\n  elapsed = true,\n  paused = false,\n  className,\n  ...props\n}: LoadingStateProps) {\n  const seconds = useElapsedSeconds(paused);\n\n  return (\n    <div\n      role=\"status\"\n      className={cn(\"flex w-fit items-center gap-2.5\", className)}\n      {...props}\n    >\n      <span\n        aria-hidden=\"true\"\n        className=\"grid shrink-0 grid-cols-[repeat(3,4px)] gap-[1.5px]\"\n      >\n        {PIXEL_DELAYS.map((delay, i) => (\n          <span\n            key={i}\n            className=\"size-[4px] rounded-[1px] bg-ink\"\n            style={{\n              opacity: 0.15,\n              animation: paused\n                ? undefined\n                : `bui-pixel-on 650ms ease-in-out ${delay}ms infinite`,\n            }}\n          />\n        ))}\n      </span>\n\n      <span\n        className=\"bg-clip-text text-[13px] font-medium text-transparent\"\n        style={{\n          backgroundImage:\n            \"linear-gradient(90deg, var(--ink-3) 35%, var(--ink) 50%, var(--ink-3) 65%)\",\n          backgroundSize: \"200% 100%\",\n          animation: paused ? undefined : \"bui-shimmer-text 1.4s linear infinite\",\n        }}\n      >\n        {label}\n      </span>\n\n      {elapsed ? (\n        <span className=\"font-mono text-[12px] text-ink-3 tabular-nums\">\n          {seconds.toFixed(1)}s\n        </span>\n      ) : null}\n    </div>\n  );\n}\n\nfunction useElapsedSeconds(paused: boolean) {\n  const [seconds, setSeconds] = React.useState(0);\n\n  React.useEffect(() => {\n    if (paused) return;\n    const started = performance.now() - seconds * 1000;\n    let frame = 0;\n    // rAF rather than setInterval so the tenths never visibly stutter or drift\n    const tick = () => {\n      setSeconds((performance.now() - started) / 1000);\n      frame = requestAnimationFrame(tick);\n    };\n    frame = requestAnimationFrame(tick);\n    return () => cancelAnimationFrame(frame);\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [paused]);\n\n  return seconds;\n}\n"
+    }
+  ]
+}

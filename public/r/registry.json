@@ -1,0 +1,88 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "beautiful-ui",
+  "homepage": "https://www.beautifului.dev",
+  "baseUrl": "https://beautiful-ui.chorus.host",
+  "items": [
+    {
+      "name": "theme",
+      "type": "registry:style",
+      "title": "Beautiful UI theme",
+      "description": "Design tokens for Beautiful UI — surfaces, ink ramp, hairlines, semantic colours, radii, easings and the layered elevation scale, in light and dark.",
+      "url": "https://beautiful-ui.chorus.host/r/theme.json",
+      "add": "npx shadcn@latest add https://beautiful-ui.chorus.host/r/theme.json"
+    },
+    {
+      "name": "loading-state",
+      "type": "registry:ui",
+      "title": "Loading State",
+      "description": "Pixel-grid loader with shimmer and elapsed time.",
+      "url": "https://beautiful-ui.chorus.host/r/loading-state.json",
+      "add": "npx shadcn@latest add https://beautiful-ui.chorus.host/r/loading-state.json"
+    },
+    {
+      "name": "thinking-state",
+      "type": "registry:ui",
+      "title": "Thinking",
+      "description": "Expandable traces — steps, reasoning, search, coding.",
+      "url": "https://beautiful-ui.chorus.host/r/thinking-state.json",
+      "add": "npx shadcn@latest add https://beautiful-ui.chorus.host/r/thinking-state.json"
+    },
+    {
+      "name": "streaming-text",
+      "type": "registry:ui",
+      "title": "Streaming Text",
+      "description": "Streamed answer with a blinking caret and an action row that fades in on completion.",
+      "url": "https://beautiful-ui.chorus.host/r/streaming-text.json",
+      "add": "npx shadcn@latest add https://beautiful-ui.chorus.host/r/streaming-text.json"
+    },
+    {
+      "name": "tool-chips",
+      "type": "registry:ui",
+      "title": "Tool Chips",
+      "description": "Collapsible run of tool calls with per-call status.",
+      "url": "https://beautiful-ui.chorus.host/r/tool-chips.json",
+      "add": "npx shadcn@latest add https://beautiful-ui.chorus.host/r/tool-chips.json"
+    },
+    {
+      "name": "approval-card",
+      "type": "registry:ui",
+      "title": "Approval Card",
+      "description": "Human-in-the-loop questions the agent asks before acting.",
+      "url": "https://beautiful-ui.chorus.host/r/approval-card.json",
+      "add": "npx shadcn@latest add https://beautiful-ui.chorus.host/r/approval-card.json"
+    },
+    {
+      "name": "task-rows",
+      "type": "registry:ui",
+      "title": "Task Rows",
+      "description": "Expandable task list with status glyphs and detail rails.",
+      "url": "https://beautiful-ui.chorus.host/r/task-rows.json",
+      "add": "npx shadcn@latest add https://beautiful-ui.chorus.host/r/task-rows.json"
+    },
+    {
+      "name": "chat-composer",
+      "type": "registry:ui",
+      "title": "Chat Composer",
+      "description": "Tabbed chat panel with reasoning replies and a composer.",
+      "url": "https://beautiful-ui.chorus.host/r/chat-composer.json",
+      "add": "npx shadcn@latest add https://beautiful-ui.chorus.host/r/chat-composer.json"
+    },
+    {
+      "name": "prompt-bar",
+      "type": "registry:ui",
+      "title": "Prompt Bar",
+      "description": "Composer with attachments, model picker, dictation and auto-growing input.",
+      "url": "https://beautiful-ui.chorus.host/r/prompt-bar.json",
+      "add": "npx shadcn@latest add https://beautiful-ui.chorus.host/r/prompt-bar.json"
+    },
+    {
+      "name": "code-block",
+      "type": "registry:ui",
+      "title": "Code Block",
+      "description": "Monospace block with optional filename header, line numbers and a copy affordance.",
+      "url": "https://beautiful-ui.chorus.host/r/code-block.json",
+      "add": "npx shadcn@latest add https://beautiful-ui.chorus.host/r/code-block.json"
+    }
+  ]
+}

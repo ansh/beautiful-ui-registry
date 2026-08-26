@@ -1,0 +1,16 @@
+{
+  "name": "beautiful-ui-registry",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-registry.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.7.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.0.0"
+  }
+}

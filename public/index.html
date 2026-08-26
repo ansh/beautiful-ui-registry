@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Beautiful UI — shadcn registry</title>
+    <meta
+      name="description"
+      content="An unofficial shadcn registry for Beautiful UI, the AI-native interface primitives by Shane Levine / Turbo."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --page: oklch(98.5% 0.001 286.376);
+        --canvas: oklch(96.1% 0.002 247.84);
+        --surface: oklch(100% 0 0);
+        --inset: oklch(97.9% 0.002 247.839);
+        --hover: oklch(97% 0.002 247.839);
+        --ink: oklch(24.7% 0.006 258.361);
+        --ink-2: oklch(50.6% 0.01 264.477);
+        --ink-3: oklch(69.5% 0.009 264.505);
+        --line: oklch(94.6% 0.003 264.542);
+        --line-strong: oklch(91.2% 0.005 258.326);
+        --accent: oklch(62.6% 0.205 254.947);
+        --accent-ink: oklch(55.6% 0.187 255.617);
+        --green: oklch(60.3% 0.155 150.883);
+        --radius-card: 10px;
+        --radius-chip: 6px;
+        --shadow-xs: 0 0 4px 0 #0000000a;
+        --shadow-sm: 0 18px 47px 0 #00000008, 0 7.5px 19px 0 #00000005,
+          0 4px 10.5px 0 #00000005, 0 2.3px 5.8px 0 #00000003;
+        --shadow-card: 0 0 0 1px var(--line), var(--shadow-sm);
+        --shadow-hairline: 0 0 0 1px var(--line);
+        --ease: cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --page: oklch(20.9% 0.004 264.477);
+          --canvas: oklch(23.1% 0.004 264.487);
+          --surface: oklch(26% 0.006 271.191);
+          --inset: oklch(24.3% 0.004 264.492);
+          --hover: oklch(28.9% 0.006 271.22);
+          --ink: oklch(96.4% 0.002 247.839);
+          --ink-2: oklch(73.1% 0.008 260.731);
+          --ink-3: oklch(54.1% 0.01 264.484);
+          --line: oklch(30.8% 0.006 258.354);
+          --line-strong: oklch(35.6% 0.007 264.474);
+          --accent: oklch(68% 0.173 253.301);
+          --accent-ink: oklch(78.8% 0.113 248.33);
+          --green: oklch(70.5% 0.154 153.814);
+          --shadow-card: 0 0 0 1px oklch(100% 0 0 / 0.11),
+            0 1px 2px oklch(0% 0 0 / 0.2), 0 2px 6px oklch(0% 0 0 / 0.2);
+          --shadow-hairline: 0 0 0 1px var(--line);
+        }
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        background: var(--canvas);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.5;
+      }
+
+      main {
+        max-width: 46rem;
+        margin: 0 auto;
+        padding: 5rem 1.5rem 6rem;
+      }
+
+      .eyebrow {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 11.5px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+
+      h1 {
+        margin-top: 0.75rem;
+        font-size: clamp(2rem, 5vw, 2.75rem);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1.1;
+      }
+
+      .lede {
+        margin-top: 1rem;
+        font-size: 15px;
+        color: var(--ink-2);
+        max-width: 34rem;
+      }
+
+      .lede a {
+        color: var(--accent-ink);
+        text-decoration: none;
+      }
+
+      .lede a:hover {
+        text-decoration: underline;
+      }
+
+      pre {
+        margin-top: 1.75rem;
+        background: var(--surface);
+        border-radius: var(--radius-card);
+        box-shadow: var(--shadow-card);
+        padding: 0.9rem 1rem;
+        overflow-x: auto;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 12.5px;
+        color: var(--ink);
+      }
+
+      h2 {
+        margin-top: 3.5rem;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: var(--ink);
+      }
+
+      .items {
+        margin-top: 1rem;
+        background: var(--surface);
+        border-radius: var(--radius-card);
+        box-shadow: var(--shadow-card);
+        overflow: hidden;
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.7rem 0.9rem;
+        border-bottom: 1px solid var(--line);
+        transition: background-color 150ms var(--ease);
+      }
+
+      .item:last-child {
+        border-bottom: 0;
+      }
+
+      .item:hover {
+        background: var(--hover);
+      }
+
+      .item-name {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 12px;
+        font-weight: 500;
+        flex-shrink: 0;
+        width: 9.5rem;
+      }
+
+      .item-desc {
+        font-size: 12.5px;
+        color: var(--ink-3);
+        flex: 1;
+        min-width: 0;
+      }
+
+      .copy {
+        flex-shrink: 0;
+        font-size: 11px;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        color: var(--ink-3);
+        background: var(--inset);
+        border: 0;
+        border-radius: var(--radius-chip);
+        box-shadow: var(--shadow-hairline);
+        padding: 0.25rem 0.5rem;
+        cursor: pointer;
+        transition:
+          color 120ms,
+          background-color 120ms;
+      }
+
+      .copy:hover {
+        color: var(--ink);
+        background: var(--hover);
+      }
+
+      .copy[data-copied="true"] {
+        color: var(--green);
+      }
+
+      p.note {
+        margin-top: 1rem;
+        font-size: 13px;
+        color: var(--ink-2);
+      }
+
+      footer {
+        margin-top: 4rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--line);
+        font-size: 12.5px;
+        color: var(--ink-3);
+      }
+
+      footer a {
+        color: var(--ink-2);
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        color: var(--ink);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">Unofficial shadcn registry</p>
+      <h1>Beautiful UI, installable.</h1>
+      <p class="lede">
+        <a href="https://www.beautifului.dev">Beautiful UI</a> publishes
+        AI-native interface primitives as MIT copy-paste components, but ships no
+        registry — so there's no way to install one from a terminal. This adds
+        that layer.
+      </p>
+
+      <pre id="headline-cmd">npx shadcn@latest add https://beautiful-ui.chorus.host/r/thinking-state.json</pre>
+
+      <h2>Items</h2>
+      <div class="items" id="items"></div>
+
+      <p class="note">
+        Every component pulls <code>theme</code> as a registry dependency, so
+        installing one brings the token layer with it. Requires Tailwind v4.
+      </p>
+
+      <h2>Provenance</h2>
+      <p class="note">
+        The token layer is transcribed exactly from the stylesheet published at
+        beautifului.dev. The components are reconstructions — the site ships no
+        repository and no source maps, so they were rebuilt from the
+        server-rendered markup and the class strings in the client bundle.
+        Layout, class names and easing curves match; the behaviour behind them
+        was rewritten. Ten of the twenty primitives are covered.
+      </p>
+      <p class="note">
+        Built for Shane to take over. Drop the real sources into
+        <code>registry/beautiful-ui/ui/</code>, rebuild, and serve
+        <code>/r/</code> from beautifului.dev — then this host can go away.
+      </p>
+
+      <footer>
+        MIT © 2026 Shane Levine ·
+        <a href="https://www.beautifului.dev">beautifului.dev</a> ·
+        <a href="https://github.com/ansh/beautiful-ui-registry">source</a> ·
+        <a href="/r/registry.json">registry.json</a>
+      </footer>
+    </main>
+
+    <script>
+      const BASE = location.origin;
+      document.getElementById("headline-cmd").textContent =
+        `npx shadcn@latest add ${BASE}/r/thinking-state.json`;
+
+      fetch("/r/registry.json")
+        .then((r) => r.json())
+        .then(({ items }) => {
+          document.getElementById("items").innerHTML = items
+            .map(
+              (item) => `
+                <div class="item">
+                  <span class="item-name">${item.name}</span>
+                  <span class="item-desc">${item.description ?? ""}</span>
+                  <button class="copy" data-url="${BASE}/r/${item.name}.json">copy</button>
+                </div>`,
+            )
+            .join("");
+        });
+
+      document.addEventListener("click", async (event) => {
+        const button = event.target.closest(".copy");
+        if (!button) return;
+        await navigator.clipboard.writeText(
+          `npx shadcn@latest add ${button.dataset.url}`,
+        );
+        button.textContent = "copied";
+        button.dataset.copied = "true";
+        setTimeout(() => {
+          button.textContent = "copy";
+          button.dataset.copied = "false";
+        }, 1400);
+      });
+    </script>
+  </body>
+</html>

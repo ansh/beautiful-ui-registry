@@ -1,0 +1,155 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "beautiful-ui",
+  "homepage": "https://www.beautifului.dev",
+  "items": [
+    {
+      "name": "theme",
+      "type": "registry:style",
+      "title": "Beautiful UI theme",
+      "description": "Design tokens for Beautiful UI — surfaces, ink ramp, hairlines, semantic colours, radii, easings and the layered elevation scale, in light and dark.",
+      "files": [
+        {
+          "path": "registry/beautiful-ui/theme/beautiful-ui.css",
+          "type": "registry:file",
+          "target": "styles/beautiful-ui.css"
+        }
+      ]
+    },
+    {
+      "name": "loading-state",
+      "type": "registry:ui",
+      "title": "Loading State",
+      "description": "Pixel-grid loader with shimmer and elapsed time.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "registryDependencies": ["theme"],
+      "files": [
+        {
+          "path": "registry/beautiful-ui/ui/loading-state.tsx",
+          "type": "registry:ui",
+          "target": "components/beautiful-ui/loading-state.tsx"
+        }
+      ]
+    },
+    {
+      "name": "thinking-state",
+      "type": "registry:ui",
+      "title": "Thinking",
+      "description": "Expandable traces — steps, reasoning, search, coding.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "registryDependencies": ["theme"],
+      "files": [
+        {
+          "path": "registry/beautiful-ui/ui/thinking-state.tsx",
+          "type": "registry:ui",
+          "target": "components/beautiful-ui/thinking-state.tsx"
+        }
+      ]
+    },
+    {
+      "name": "streaming-text",
+      "type": "registry:ui",
+      "title": "Streaming Text",
+      "description": "Streamed answer with a blinking caret and an action row that fades in on completion.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "registryDependencies": ["theme"],
+      "files": [
+        {
+          "path": "registry/beautiful-ui/ui/streaming-text.tsx",
+          "type": "registry:ui",
+          "target": "components/beautiful-ui/streaming-text.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tool-chips",
+      "type": "registry:ui",
+      "title": "Tool Chips",
+      "description": "Collapsible run of tool calls with per-call status.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "registryDependencies": ["theme"],
+      "files": [
+        {
+          "path": "registry/beautiful-ui/ui/tool-chips.tsx",
+          "type": "registry:ui",
+          "target": "components/beautiful-ui/tool-chips.tsx"
+        }
+      ]
+    },
+    {
+      "name": "approval-card",
+      "type": "registry:ui",
+      "title": "Approval Card",
+      "description": "Human-in-the-loop questions the agent asks before acting.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "registryDependencies": ["theme"],
+      "files": [
+        {
+          "path": "registry/beautiful-ui/ui/approval-card.tsx",
+          "type": "registry:ui",
+          "target": "components/beautiful-ui/approval-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "task-rows",
+      "type": "registry:ui",
+      "title": "Task Rows",
+      "description": "Expandable task list with status glyphs and detail rails.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "registryDependencies": ["theme"],
+      "files": [
+        {
+          "path": "registry/beautiful-ui/ui/task-rows.tsx",
+          "type": "registry:ui",
+          "target": "components/beautiful-ui/task-rows.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chat-composer",
+      "type": "registry:ui",
+      "title": "Chat Composer",
+      "description": "Tabbed chat panel with reasoning replies and a composer.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "registryDependencies": ["theme"],
+      "files": [
+        {
+          "path": "registry/beautiful-ui/ui/chat-composer.tsx",
+          "type": "registry:ui",
+          "target": "components/beautiful-ui/chat-composer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "prompt-bar",
+      "type": "registry:ui",
+      "title": "Prompt Bar",
+      "description": "Composer with attachments, model picker, dictation and auto-growing input.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "registryDependencies": ["theme"],
+      "files": [
+        {
+          "path": "registry/beautiful-ui/ui/prompt-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/beautiful-ui/prompt-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "code-block",
+      "type": "registry:ui",
+      "title": "Code Block",
+      "description": "Monospace block with optional filename header, line numbers and a copy affordance.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "registryDependencies": ["theme"],
+      "files": [
+        {
+          "path": "registry/beautiful-ui/ui/code-block.tsx",
+          "type": "registry:ui",
+          "target": "components/beautiful-ui/code-block.tsx"
+        }
+      ]
+    }
+  ]
+}

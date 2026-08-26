@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "code-block",
+  "type": "registry:ui",
+  "title": "Code Block",
+  "description": "Monospace block with optional filename header, line numbers and a copy affordance.",
+  "author": "Shane Levine <https://www.beautifului.dev>",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://beautiful-ui.chorus.host/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "registry/beautiful-ui/ui/code-block.tsx",
+      "type": "registry:ui",
+      "target": "components/beautiful-ui/code-block.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {\n  code: string;\n  language?: string;\n  filename?: string;\n  showLineNumbers?: boolean;\n}\n\nexport function CodeBlock({\n  code,\n  language,\n  filename,\n  showLineNumbers = false,\n  className,\n  ...props\n}: CodeBlockProps) {\n  const [copied, setCopied] = React.useState(false);\n  const lines = React.useMemo(() => code.replace(/\\n$/, \"\").split(\"\\n\"), [code]);\n\n  const copy = async () => {\n    try {\n      await navigator.clipboard.writeText(code);\n      setCopied(true);\n      setTimeout(() => setCopied(false), 1600);\n    } catch {\n      // clipboard is unavailable over http or without permission — leave the\n      // affordance in place rather than surfacing an error for a copy button\n    }\n  };\n\n  return (\n    <div\n      className={cn(\n        \"group relative w-full overflow-hidden rounded-card bg-surface shadow-card\",\n        className,\n      )}\n      {...props}\n    >\n      {filename || language ? (\n        <div className=\"flex items-center justify-between border-b border-line px-2.5 py-1.5\">\n          <span className=\"font-mono text-[11.5px] text-ink-2\">\n            {filename ?? language}\n          </span>\n          {filename && language ? (\n            <span className=\"font-mono text-[11px] text-ink-3\">{language}</span>\n          ) : null}\n        </div>\n      ) : null}\n\n      <button\n        type=\"button\"\n        aria-label={copied ? \"Copied\" : \"Copy code\"}\n        onClick={copy}\n        className=\"absolute top-2 right-2 z-10 flex size-7 items-center justify-center rounded-control bg-surface text-ink-3 opacity-0 shadow-btn transition-[opacity,color,background-color] duration-150 group-focus-within:opacity-100 group-hover:opacity-100 hover:bg-hover hover:text-ink\"\n      >\n        {copied ? (\n          <svg\n            width=\"14\"\n            height=\"14\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"var(--green)\"\n            strokeWidth=\"2.4\"\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n          >\n            <path d=\"M20 6L9 17l-5-5\" />\n          </svg>\n        ) : (\n          <svg\n            width=\"14\"\n            height=\"14\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth=\"2\"\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n          >\n            <rect x=\"9\" y=\"9\" width=\"12\" height=\"12\" rx=\"2.5\" />\n            <path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\" />\n          </svg>\n        )}\n      </button>\n\n      <pre className=\"overflow-x-auto p-2.5 font-mono text-[12px] leading-[1.6] text-ink\">\n        <code>\n          {lines.map((line, i) => (\n            <span key={i} className=\"block\">\n              {showLineNumbers ? (\n                <span className=\"mr-3 inline-block w-6 shrink-0 text-right text-ink-3 tabular-nums select-none\">\n                  {i + 1}\n                </span>\n              ) : null}\n              {line || \" \"}\n            </span>\n          ))}\n        </code>\n      </pre>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

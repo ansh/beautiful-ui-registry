@@ -41,21 +41,22 @@ jobs:
             exit 1
           fi
 
-      # The installer tries to sudo into /usr/local/bin and falls back to
-      # ~/.local/bin; on a runner the sudo attempt is noise, so don't let a
-      # non-zero exit from it mask a genuine failure to produce the binary.
+      # The installer lands in /usr/local/bin when it can sudo and ~/.local/bin
+      # when it can't, so put both on PATH rather than guessing which.
       - name: Install beacon
         run: |
-          curl -fsSL https://chorus.host/install.sh | sh || true
-          test -x "$HOME/.local/bin/beacon" || { echo "::error::beacon not installed"; exit 1; }
-          "$HOME/.local/bin/beacon" version
+          curl -fsSL https://chorus.host/install.sh | sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Verify beacon is on PATH
+        run: beacon version
 
       - name: Deploy to chorus.host
         working-directory: public
         env:
           CHORUS_API_KEY: ${{ secrets.CHORUS_API_KEY }}
         run: |
-          "$HOME/.local/bin/beacon" deploy \
+          beacon deploy \
             --slug beautiful-ui \
             --api-key "$CHORUS_API_KEY" \
             --pretty

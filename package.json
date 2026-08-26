@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-registry.mjs",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "deploy": "node scripts/build-registry.mjs && cd public && beacon deploy --slug beautiful-ui"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",

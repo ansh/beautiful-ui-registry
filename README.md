@@ -104,8 +104,7 @@ The only setup it needs is a `CHORUS_API_KEY` repository secret — a chorus.hos
 key, which you get from `beacon login`. To deploy by hand:
 
 ```bash
-node scripts/build-registry.mjs
-cd public && beacon deploy --slug beautiful-ui
+npm run deploy
 ```
 
 To point the registry somewhere else, change `BASE_URL` in the workflow and the

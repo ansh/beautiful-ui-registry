@@ -61,6 +61,20 @@
   --font-mono: var(--font-mono-face), ui-monospace, "SF Mono", monospace;
 }
 
+/*
+ * `inline` substitutes the var() straight into the utility instead of adding
+ * another indirection, so `shadow-card` resolves against whichever of
+ * :root / .dark is in scope. Without it these would bake in the light values.
+ */
+@theme inline {
+  --shadow-hairline: var(--shadow-hairline);
+  --shadow-btn: var(--shadow-btn);
+  --shadow-card: var(--shadow-card);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-overlay: var(--shadow-overlay);
+  --inset-shadow-field: var(--shadow-inset-field);
+}
+
 :root {
   --font-inter: "Inter", "Inter Fallback";
   --font-mono-face: "JetBrains Mono", "JetBrains Mono Fallback";

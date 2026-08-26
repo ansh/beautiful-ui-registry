@@ -75,16 +75,41 @@ The components are **reconstructions**, not the original source. beautifului.dev
 
 Ten of the twenty primitives on the site are covered here. The remaining ten — Recommendation Card, Context Cards, Diff Table, Records Table, Filter Table, Sidebar Nav, Search, Flowchart, Insight Cards, Fine-tune Card, Selection Actions — are heavier on interaction logic and aren't worth reconstructing blind.
 
-**If you're Shane:** this is yours to take. Drop your real sources into `registry/beautiful-ui/ui/`, add entries to `registry.json`, run `node scripts/build-registry.mjs`, and serve `public/r/` from beautifului.dev. Then the install command becomes `npx shadcn@latest add https://www.beautifului.dev/r/thinking-state.json` and this repo can go away.
+**If you're Shane:** this is yours to take. Drop your real sources into `registry/beautiful-ui/ui/`, add entries to `registry.json`, run `node scripts/build-registry.mjs`, and serve `public/r/` from beautifului.dev — the build script and the deploy workflow are both parameterised, so `BASE_URL=https://www.beautifului.dev` is the only change needed. Then the install command becomes `npx shadcn@latest add https://www.beautifului.dev/r/thinking-state.json` and this repo can go away.
 
 ## Building
+
+`registry.json` is the source of truth. `public/r/` is generated from it — each item
+inlined with its file contents, plus an index at `public/r/registry.json`.
 
 ```bash
 node scripts/build-registry.mjs                     # -> public/r/*.json
 BASE_URL=https://www.beautifului.dev node scripts/build-registry.mjs
 ```
 
-`BASE_URL` rewrites the absolute URLs in each item's `registryDependencies`, which have to be absolute for a registry that isn't ui.shadcn.com.
+`BASE_URL` rewrites the absolute URLs in each item's `registryDependencies`, which
+have to be absolute for a registry that isn't ui.shadcn.com.
+
+Commit the rebuilt `public/r/` alongside your source change — CI fails if the two
+drift, so the copy in the repo always matches what's served.
+
+## Deploying
+
+Pushing to `main` deploys automatically. [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+typechecks the components, rebuilds the registry, checks the committed build is in
+sync, publishes `public/` to chorus.host under the `beautiful-ui` slug, and then
+fetches four items back to confirm the deploy actually took.
+
+The only setup it needs is a `CHORUS_API_KEY` repository secret — a chorus.host API
+key, which you get from `beacon login`. To deploy by hand:
+
+```bash
+node scripts/build-registry.mjs
+cd public && beacon deploy --slug beautiful-ui
+```
+
+To point the registry somewhere else, change `BASE_URL` in the workflow and the
+`--slug`; everything else follows from `registry.json`.
 
 ## License
 
